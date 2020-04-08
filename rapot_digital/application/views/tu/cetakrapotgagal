@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <?php $this->load->view('partials/head.php') ?>
+    <style>  
+        table {  
+            font-family: arial, sans-serif;  
+            width: 100%;  
+        }  
+        th{
+            border: 1px solid black;
+        }
+       
+  
+/*        tr:nth-child(even) {  
+            background-color: #dddddd;  
+        }  
+*/    </style>
+</head>
+<body style="font-family: arial">
+    <input type="button" id="create_pdf" value="Generate PDF"> 
+<form class="form" style="max-width: none; width: 1005px;">  
+  
+          <div class="text-right" style="line-height: 18px; font-size: 60%">
+              <dl>                                          
+              <dt>YAYASAN PRAWITAMA</dt>
+              <dt>SMK WIKRAMA BOGOR</dt>
+              <dd>Jalan Raya Wangun Kel. Sindangsari - Bogor, Telp./Fax (0251) 8242411 <br> Website : www.smkwikrama.sch.id, e-mail : prohumasi@smkwikrama.sch.id</dd>
+          </dl>
+            </div>
+
+    <hr class="" style="border: 0; border-top: 3px double #8c8c8c">
+        <p style="text-align: center; font-size: 100%">LAPORAN PENCAPAIAN KOMPETENSI PESERTA DIDIK</p>  
+       <?php foreach ($content->result() as $key): ?>
+        <table style="font-size: 75%">
+            <tr>
+                <td width="18%">NIS</td>
+                <td width="2%">:</td>
+                <td width="40%"><?php echo $key->nis ?></td>
+                <td width="15%">Tahun Pelajaran</td>
+                <td width="5%">:</td>
+                <td width="20%">2019-2020</td>
+            </tr>
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td>Shandra Dwi Putra Hasibuan</td>
+                <td>Semester</td>
+                <td>:</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>Kompetensi Keahlian</td>
+                <td>:</td>
+                <td>Rekayasa Perangkat Lunak</td>
+                <td>Rombel</td>
+                <td>:</td>
+                <td>RPL XII - 3</td>
+            </tr>
+        </table>
+       <?php endforeach ?>
+        <br>
+        <p style="font-size: 80%"><b>CAPAIAN HASIL BELAJAR</b></p>
+        <p style="font-size: 75% "><b>A. Sikap</b></p>  
+        <table style="border: 2px solid black; font-size: 70%" >
+            <tr>
+                <td>
+                    <b>Deskripsi :</b> <br>
+                    1. Peserta didik menunjukkan sikap sungguh-sungguh dalam menerapkan sikap Spiritual, Jujur, Disiplin, Tanggung jawab, Toleransi, Gotong Royong, Sopan atau Santun dan Percaya diri <br>
+                    2. Persentase kehadiran siswa 40%.
+                    
+                        
+                </td>
+            </tr>
+        </table>
+        <br>
+        <p style="font-size: 75% "><b>B. Pengetahuan dan Keterampilan</b></p>  
+           <?php 
+                                        if ($this->uri->segment(3) == 1 ) {
+                                          ?>
+
+                                        <!-- SEMESTER 1 -->
+                                        <table class="mb-1 mt-4 table table-bordered text-center "  style="border: 2px solid black; font-size: 60%">
+                                          <thead>
+                                            <tr>
+                                            <th rowspan="2" colspan="2">MATA PELAJARAN</th>
+                                            <th colspan="4">Pengetahuan</th>
+                                            <th colspan="4">Keterampilan</th>
+                                            </tr>
+                                            <tr>
+                                              <th>KB*</th>
+                                              <th>Angka</th>
+                                              <th>Predikat</th>
+                                              <th>Deskripsi</th>
+                        <th>KB*</th>
+                                              <th>Angka</th>
+                                              <th>Predikat</th>
+                                              <th>Deskripsi</th>
+
+                                            </tr>
+                                        
+                                          </thead>
+                                          <tbody>
+                                            <?php 
+                                            $no = 1;
+                                            foreach ($uh1p as $index => $key) {
+                                              $total = array(
+                                                            $key->nilai,
+                                                            $uh2p[$index]->nilai,
+                                                            $uh3p[$index]->nilai,
+                                                            $uh4p[$index]->nilai
+                                                          );
+                                                    $uh = array_sum($total)/4;
+                                                    $uts = $utsp[$index]->nilai;
+                                                    $uas = $uasp[$index]->nilai;
+                                                    $jumlah = ($uh + $uts + $uas) / 3;
+                                                  if ($jumlah == 0) {
+                                                    $Predikat = '-';
+                                                    $ket = '-';
+                                                  }elseif ($jumlah < 50) {
+                                                    $Predikat = 'E';
+                                                    $ket = 'sangat kurang';
+                                                  }elseif ($jumlah < 65) {
+                                                    $Predikat = 'D';
+                                                    $ket = 'kurang';
+                                                  }elseif ($jumlah < 80) {
+                                                    $Predikat = 'C';
+                                                    $ket = 'cukup';
+                                                  }elseif ($jumlah < 90) {
+                                                    $Predikat = 'B';
+                                                    $ket = 'baik';
+                                                  }else{
+                                                    $Predikat = 'A';
+                                                    $ket = 'sangat baik';
+                                                  }
+
+                        $totalk = array(
+                                                      $uh1k[$index]->nilai,
+                                                      $uh2k[$index]->nilai,
+                                                      $uh3k[$index]->nilai,
+                                                      $uh4k[$index]->nilai
+                                                  );
+                                                  $kuts =  $utsk[$index]->nilai; 
+                                                  $kuas =  $uask[$index]->nilai;
+                                                  $kuh = array_sum($totalk)/4;
+                                                  $kuas = $uasp[$index]->nilai;
+                                                  $kjumlah = ($kuh + $kuts + $kuas) / 3;
+                                                  if ($kjumlah == 0) {
+                                                    $kPredikat = '-';
+                                                    $kket = '-';
+                                                  }elseif ($kjumlah < 50) {
+                                                    $kPredikat = 'E';
+                                                    $kket = 'sangat kurang';
+                                                  }elseif ($kjumlah < 65) {
+                                                    $kPredikat = 'D';
+                                                    $kket = 'kurang';
+                                                  }elseif ($kjumlah < 80) {
+                                                    $kPredikat = 'C';
+                                                    $kket = 'cukup';
+                                                  }elseif ($kjumlah < 90) {
+                                                    $kPredikat = 'B';
+                                                    $kket = 'baik';
+                                                  }else{
+                                                    $kPredikat = 'A';
+                                                    $kket = 'sangat baik';
+                                                  }
+                                              ?>
+                                              <tr>
+                                                <td width="5%"><?php echo $no++ ?></td>
+                                                <td width="15%" class="text-left"><?php echo $uh2p[$index]->mapel ?></td>
+                                                <td width="5%">75</td>
+                                                <td width="5%"><?php echo round($jumlah, 2);?></td>
+                                                <td width="5%"><?php echo $Predikat ?></td>
+                                                <td width="25%" class="text-left">Secara umum kompetensi peserta didik mencapai predikat <?php echo $ket.' ('.round($jumlah,1).'%)' ?> pada pelajaran ini. </td>
+                                                <td width="5%">76</td>
+                                                <td width="5%"><?php echo round($kjumlah, 2);?></td>
+                                                <td width="5%"><?php echo $kPredikat ?></td>
+                                                <td width="25%" class="text-left">Secara umum kompetensi peserta didik mencapai predikat <?php echo $kket.' ('.round($kjumlah,1).'%)' ?> pada pelajaran ini. </td>
+                                                 
+                                              </tr>
+
+
+                                            <?php } ?>
+                                          </tbody>
+
+                                        </table>
+                         
+
+                                        <?php 
+                                      }else{
+                                     ?> 
+
+                                     <!-- SEMESTER 2  -->
+                                    <table class="mb-1 mt-4 table table-bordered text-center "  style="border: 2px solid black; font-size: 60%">
+                                          <thead>
+                                            <tr>
+                                            <th rowspan="2" colspan="2">MATA PELAJARAN</th>
+                                            <th colspan="4">Pengetahuan</th>
+                                            <th colspan="4">Keterampilan</th>
+                                            </tr>
+                                            <tr>
+                                              <th>KB*</th>
+                                              <th>Angka</th>
+                                              <th>Predikat</th>
+                                              <th>Deskripsi</th>
+                        <th>KB*</th>
+                                              <th>Angka</th>
+                                              <th>Predikat</th>
+                                              <th>Deskripsi</th>
+
+                                            </tr>
+                                        
+                                          </thead>
+                                          <tbody>
+                                            <?php 
+                                            $no = 1;
+                                            foreach ($uh1p as $index => $key) {
+                                              $total = array(
+                                                            $uh5p[$index]->nilai,
+                                                            $uh6p[$index]->nilai,
+                                                            $uh7p[$index]->nilai,
+                                                            $uh8p[$index]->nilai
+                                                          );
+                                                    $uh = array_sum($total)/4;
+                                                    $uts = $utspg[$index]->nilai;
+                                                    $uas = $ukkp[$index]->nilai;
+                                                    $jumlah = ($uh + $uts + $uas) / 3;
+                                                  if ($jumlah == 0) {
+                                                    $Predikat = '-';
+                                                    $ket = '-';
+                                                  }elseif ($jumlah < 50) {
+                                                    $Predikat = 'E';
+                                                    $ket = 'sangat kurang';
+                                                  }elseif ($jumlah < 65) {
+                                                    $Predikat = 'D';
+                                                    $ket = 'kurang';
+                                                  }elseif ($jumlah < 80) {
+                                                    $Predikat = 'C';
+                                                    $ket = 'cukup';
+                                                  }elseif ($jumlah < 90) {
+                                                    $Predikat = 'B';
+                                                    $ket = 'baik';
+                                                  }else{
+                                                    $Predikat = 'A';
+                                                    $ket = 'sangat baik';
+                                                  }
+
+                        $totalk = array(
+                                                      $uh5k[$index]->nilai,
+                                                      $uh6k[$index]->nilai,
+                                                      $uh7k[$index]->nilai,
+                                                      $uh8k[$index]->nilai
+                                                  );
+                                                  $kuts =  $utskg[$index]->nilai; 
+                                                  $kuas =  $ukkk[$index]->nilai;
+                                                  $kuh = array_sum($totalk)/4;
+                                                  $kjumlah = ($kuh + $kuts + $kuas) / 3;
+                                                  if ($kjumlah == 0) {
+                                                    $kPredikat = '-';
+                                                    $kket = '-';
+                                                  }elseif ($kjumlah < 50) {
+                                                    $kPredikat = 'E';
+                                                    $kket = 'sangat kurang';
+                                                  }elseif ($kjumlah < 65) {
+                                                    $kPredikat = 'D';
+                                                    $kket = 'kurang';
+                                                  }elseif ($kjumlah < 80) {
+                                                    $kPredikat = 'C';
+                                                    $kket = 'cukup';
+                                                  }elseif ($kjumlah < 90) {
+                                                    $kPredikat = 'B';
+                                                    $kket = 'baik';
+                                                  }else{
+                                                    $kPredikat = 'A';
+                                                    $kket = 'sangat baik';
+                                                  }
+                                              ?>
+                                              <tr>
+                                                <td width="5%"><?php echo $no++ ?></td>
+                                                <td width="15%" class="text-left"><?php echo $uh2p[$index]->mapel ?></td>
+                                                <td width="5%">75</td>
+                                                <td width="5%"><?php echo round($jumlah, 2);?></td>
+                                                <td width="5%"><?php echo $Predikat ?></td>
+                                                <td width="25%" class="text-left">Secara umum kompetensi peserta didik mencapai predikat <?php echo $ket.' ('.round($jumlah,1).'%)' ?> pada pelajaran ini. </td>
+                                                <td width="5%">76</td>
+                                                <td width="5%"><?php echo round($kjumlah, 2);?></td>
+                                                <td width="5%"><?php echo $kPredikat ?></td>
+                                                <td width="25%" class="text-left">Secara umum kompetensi peserta didik mencapai predikat <?php echo $kket.' ('.round($kjumlah,1).'%)' ?> pada pelajaran ini. </td>
+                                                 
+                                              </tr>
+
+
+                                            <?php } ?>
+                                          </tbody>
+
+                                        </table>
+
+
+                                   <?php  }
+                                         ?>
+
+        <p style="font-size: 75% "><b>C. Ekstrakulikuler</b></p>
+         <table class="table table-bordered" style="border: 2px solid black; font-size: 60%">
+                                          <thead>
+                                            <tr>
+                                              <td width="5%">No</td>
+                                              <td width="35%">Kegiatan Ekstrakulikuler</td>
+                                              <td>Deskripsi</td>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                              <?php
+                                              $no = 1;
+                                               foreach ($upd->result() as $key) {
+                                                $s = ' dalam mengikuti kegiatan';
+                                                if ($key->nilai1 == 'A') {
+                                                  $ket = 'Sangat Aktif'.$s;
+                                                }elseif ($key->nilai1 == 'B') {
+                                                  $ket = 'Aktif'.$s;
+                                                }elseif ($key->nilai1 == 'C') {
+                                                  $ket = 'Cukup Aktif'.$s;
+                                                }else{
+                                                  $ket = 'Kurang Aktif'.$s;
+                                                }
+
+                                                if ($key->nilai2 == 'A') {
+                                                  $ket2 = 'Sangat Aktif'.$s;
+                                                }elseif ($key->nilai2 == 'B') {
+                                                  $ket2 = 'Aktif'.$s;
+                                                }elseif ($key->nilai2 == 'C') {
+                                                  $ket2 = 'Cukup Aktif'.$s;
+                                                }else{
+                                                  $ket2 = 'Kurang Aktif'.$s;
+                                                }
+                                                ?>
+
+                                            <tr>
+                                              <td><?php echo $no++ ?></td>
+                                              <td><?php echo $key->upd1 ?></td>
+                                              <td><?php echo $ket ?></td>
+                                            </tr>
+                                            <tr>
+                                              <td><?php echo $no++ ?></td>
+                                              <td><?php echo $key->upd2 ?></td>
+                                              <td><?php echo $ket2 ?></td>
+                                            </tr>
+                                                <?php 
+                                              } ?>
+                                            <tr>
+                                              <td>3</td>
+                                              <td>-</td>
+                                              <td>-</td>
+                                            </tr>
+                                          </tbody>
+
+                                        </table>  
+        <p style="font-size: 75% "><b>D. Prestasi</b></p>  
+        <table class="table table-bordered"  style="border: 2px solid black; font-size: 60%">
+                                          <thead>
+                                            <tr>
+                                              <td width="5%">No</td>
+                                              <td width="35%">Jenis Prestasi</td>
+                                              <td>Keterangan</td>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <?php 
+                                            $no = 1;
+                                            foreach ($prestasi->result() as $key) {
+                                              ?>
+                                              <tr>
+                                                <td><?php echo $no++ ?></td>
+                                                <td><?php echo $key->prestasi1 ?></td>
+                                                <td><?php echo $key->keterangan1 ?></td>
+                                              </tr>
+                                              <tr>
+                                                <td><?php echo $no++ ?></td>
+                                                <td><?php echo $key->prestasi2 ?></td>
+                                                <td><?php echo $key->keterangan2 ?></td>
+                                              </tr>
+                                              <tr>
+                                                <td><?php echo $no++ ?></td>
+                                                <td><?php echo $key->prestasi3 ?></td>
+                                                <td><?php echo $key->keterangan3 ?></td>
+                                              </tr>
+
+                                              <?php 
+                                            } ?>
+                                          </tbody>
+                                        </table>
+
+                                        <br>  <br>  <br>  <br>  <br>  
+        <p style="font-size: 75% ; page-break-before: always;"><b>B. Pengetahuan dan Keterampilan</b></p>  
+        <p style="font-size: 75% "><b>B. Pengetahuan dan Keterampilan</b></p>  
+
+
+    </form>  
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>  
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>  
+
+    <script>  
+    (function () {  
+        var  
+         form = $('.form'),  
+         cache_width = form.width(),  
+         a4 = [595.28, 841.89]; // for a4 size paper width and height  
+  
+        $('#create_pdf').on('click', function () {  
+            $('body').scrollTop(0);  
+            createPDF();  
+        });  
+        //create pdf  
+        function createPDF() {  
+            getCanvas().then(function (canvas) {  
+                var  
+                 img = canvas.toDataURL("image/png"),  
+                 doc = new jsPDF({  
+                     unit: 'px',  
+                     format: 'a4'  
+                 });  
+                doc.addImage(img, 'JPEG', 20, 20);  
+                doc.save('Bhavdip-html-to-pdf.pdf');  
+                form.width(cache_width);  
+            });  
+        }  
+  
+        // create canvas object  
+        function getCanvas() {  
+            form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');  
+            return html2canvas(form, {  
+                imageTimeout: 2000,  
+                removeContainer: true  
+            });  
+        }  
+  
+    }());  
+</script>  
+<script>  
+    /* 
+ * jQuery helper plugin for examples and tests 
+ */  
+    (function ($) {  
+        $.fn.html2canvas = function (options) {  
+            var date = new Date(),  
+            $message = null,  
+            timeoutTimer = false,  
+            timer = date.getTime();  
+            html2canvas.logging = options && options.logging;  
+            html2canvas.Preload(this[0], $.extend({  
+                complete: function (images) {  
+                    var queue = html2canvas.Parse(this[0], images, options),  
+                    $canvas = $(html2canvas.Renderer(queue, options)),  
+                    finishTime = new Date();  
+  
+                    $canvas.css({ position: 'absolute', left: 0, top: 0 }).appendTo(document.body);  
+                    $canvas.siblings().toggle();  
+  
+                    $(window).click(function () {  
+                        if (!$canvas.is(':visible')) {  
+                            $canvas.toggle().siblings().toggle();  
+                            throwMessage("Canvas Render visible");  
+                        } else {  
+                            $canvas.siblings().toggle();  
+                            $canvas.toggle();  
+                            throwMessage("Canvas Render hidden");  
+                        }  
+                    });  
+                    throwMessage('Screenshot created in ' + ((finishTime.getTime() - timer) / 1000) + " seconds<br />", 4000);  
+                }  
+            }, options));  
+  
+            function throwMessage(msg, duration) {  
+                window.clearTimeout(timeoutTimer);  
+                timeoutTimer = window.setTimeout(function () {  
+                    $message.fadeOut(function () {  
+                        $message.remove();  
+                    });  
+                }, duration || 2000);  
+                if ($message)  
+                    $message.remove();  
+                $message = $('<div ></div>').html(msg).css({  
+                    margin: 0,  
+                    padding: 10,  
+                    background: "#000",  
+                    opacity: 0.7,  
+                    position: "fixed",  
+                    top: 10,  
+                    right: 10,  
+                    fontFamily: 'Tahoma',  
+                    color: '#fff',  
+                    fontSize: 12,  
+                    borderRadius: 12,  
+                    width: 'auto',  
+                    height: 'auto',  
+                    textAlign: 'center',  
+                    textDecoration: 'none'  
+                }).hide().fadeIn().appendTo('body');  
+            }  
+        };  
+    })(jQuery);  
+  
+</script>  
+</body>
+</html>
