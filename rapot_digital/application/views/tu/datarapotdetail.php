@@ -43,180 +43,109 @@
                             
                             
                             <div class="col-lg-12">
-                                  <a href="<?php echo base_url('tu/cetakrapot/')?><?php echo $this->uri->segment(3) ?>/<?php echo $this->uri->segment(4) ?>" class="text-center"><h3>Cetak</h3></a>
+                                      <div class="d-flex justify-content-center mt-4 mb-4">
+  <button type="submit" class="btn btn-primary" id="print" style="height: 40px; width: 50vh; text-align: center;">CETAK</button>
+      
+                             </div>
                                 <div class="main-card mb-3 card">
+
                                     <div class="card-body">
-                                    	<div class="row">
-                                    		<div class="col-md-2">
-                                    			<img style="width: 10vh" src="<?php echo base_url('assets/halutama/assets/img/portfolio/logo_wk.png') ?>">
-                                    		</div>
-                                    		<div class="col-md-10 text-right" style="line-height: 18px">
-                                    			<dl>                                    			
-                                    			<dt>YAYASAN PRAWITAMA</dt>
-                                    			<dt>SMK WIKRAMA BOGOR</dt>
-                                    			<dd>Jalan Raya Wangun Kel. Sindangsari - Bogor, Telp./Fax (0251) 8242411 <br> Website : www.smkwikrama.sch.id, e-mail : prohumasi@smkwikrama.sch.id</dd>
-                                    			
-											</dl>
+                                    	  <div class="d-flex justify-content-center mt-4 mb-4">
+                                          <div class="cetak">
+  <form class="form" style="max-width: none; width: 1005px;">  
+          <table width="100%">
+            <tr style="height: 6vh">
+              <td width="50%">
+                <img style="width: 9vh" src="<?php echo base_url('assets/halutama/assets/img/portfolio/logo_wk.png') ?>">
+              </td>
+              <td width="50%">
+          <div class="text-right" style="line-height: 18px; font-size: 100%">
+              <dl>                                          
+              <dt>YAYASAN PRAWITAMA</dt>
+              <dt>SMK WIKRAMA BOGOR</dt>
+              <dd>Jalan Raya Wangun Kel. Sindangsari - Bogor, Telp./Fax (0251) 8242411 <br> Website : www.smkwikrama.sch.id, e-mail : prohumasi@smkwikrama.sch.id</dd>
+          </dl>
+            </div>
+                
+              </td>
+            </tr>
+          </table>
 
-                                    		</div>
-                                    	</div>
-                                    	<hr class="" style="border: 0; border-top: 3px double #8c8c8c">
-                                    	<h5 class="text-center" style="margin-bottom: 20px;"><b>LAPORAN PENCAPAIAN KOMPETENSI PESERTA DIDIK</b></h5>
-                                          
+    <hr class="" style="border: 0; border-top: 3px double black; margin-top: 3px">
+        <h4 style="text-align: center"><b>LAPORAN PENCAPAIAN KOMPETENSI PESERTA DIDIK</b></h4>  
+       <?php foreach ($content->result() as $key): ?>
+        <table style="margin-top: 3vh" width="100%">
+            <tr>
+                <td width="18%">NIS</td>
+                <td width="2%">:</td>
+                <td width="40%"><?php echo $key->nis ?></td>
+                <td width="15%">Tahun Pelajaran</td>
+                <td width="5%">:</td>
+                <td width="20%">2019-2020</td>
+            </tr>
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td><?php echo $key->nama ?></td>
+                <td>Semester</td>
+                <td>:</td>
+                <td><?php echo $this->uri->segment(3) ?></td>
+            </tr>
+            <tr>
+                <td>Kompetensi Keahlian</td>
+                <td>:</td>
+                <td>
+                     <?php 
+                 $jurusan = $key->rombel;
+                 $pecah = explode(" ", $jurusan);
+                 $hasil = $pecah[0];
+                 if ($hasil == "RPL") {
+                    echo "Rekayasa Perangkat Lunak";
+                   }elseif ($hasil == "TKJ") {
+                    echo "Teknik Komputer dan Jaringan";
+                   }else {
+                    echo "Bisnis Daring dan Pemasaran";
+                   }
 
-                                        <?php foreach ($content->result() as $key): ?>
-
-                                          <div class="row" style="line-height: 1">
-                                          <div class="col-md-7">
-                                           <div class="row" >
-                                               <div class="col-md-4">
-                                                   <p>NIS</p>
-                                               </div>
-                                               <div class="col-md-1">
-                                                   <p>:</p>
-                                               </div>
-                                               <div class="col-md-6">
-                                                   <p>
-                                                       <?php echo $key->nis ?>
-                                                   </p>
-                                               </div>
-                                               <input type="hidden" name="nis" value="<?php echo $key->nis  ?>"  >
-                                               
-                                           </div>
-                                            <div class="row">
-                                               <div class="col-md-4">
-                                                   <p>Nama</p>
-                                               </div>
-                                               <div class="col-md-1">
-                                                   <p>:</p>
-                                               </div>
-                                               <div class="col-md-6">
-                                                   <p>
-                                                       <?php echo $key->nama ?>
-                                                   </p>
-                                               </div>
-                                               
-                                           </div>
-                                            <div class="row">
-                                               <div class="col-md-4">
-                                                   <p>Kompetensi Keahlian</p>
-                                               </div>
-                                               <div class="col-md-1">
-                                                   <p>:</p>
-                                               </div>
-                                               <div class="col-md-6">
-                                                   <p>
-                                                       <?php 
-                                                       $jurusan = $key->rombel;
-                                                       $pecah = explode(" ", $jurusan);
-                                                       $hasil = $pecah[0];
-                                                       if ($hasil == "RPL") {
-                                                         	echo "Rekayasa Perangkat Lunak";
-                                                         }elseif ($hasil == "TKJ") {
-                                                         	echo "Teknik Komputer dan Jaringan";
-                                                         }else {
-                                                         	echo "Bisnis Daring dan Pemasaran";
-                                                         }
-
-                                                       ?>
-                                                       
-                                                   </p>
-                                               </div>
-                                               
-                                           </div>
-
-
-                                           </div>
-
-                                           <div class="col-md-5">
-                                           <div class="row">
-                                               <div class="col-md-4">
-                                                   <p>Tahun Pelajaran</p>
-                                               </div>
-                                               <div class="col-md-1">
-                                                   <p>:</p>
-                                               </div>
-                                               <div class="col-md-6">
-                                                   <p>
-                                                       2019-2020
-                                                   </p>
-                                               </div>
-                                               <input type="hidden" name="nis" value="<?php echo $key->nis  ?>"  >
-                                               
-                                           </div>
-                                            <div class="row">
-                                               <div class="col-md-4">
-                                                   <p>Semester</p>
-                                               </div>
-                                               <div class="col-md-1">
-                                                   <p>:</p>
-                                               </div>
-                                               <div class="col-md-6">
-                                                   <p>
-                                                       <?php echo $this->uri->segment(3) ?>
-                                                   </p>
-                                               </div>
-                                               
-                                           </div>
-                                            <div class="row">
-                                               <div class="col-md-4">
-                                                   <p>Rombel</p>
-                                               </div>
-                                               <div class="col-md-1">
-                                                   <p>:</p>
-                                               </div>
-                                               <div class="col-md-6">
-                                                   <p>
-                                                       <?php echo $key->rombel ?>
-                                                   </p>
-                                               </div>
-                                               
-                                           </div>
-                                           
-
-
-                                           </div>
-                                           </div>
-                                        <?php endforeach ?>
-                                                           
-
-                                        </form>
-                                        	
-                                        <dl class="mt-3">
-                                        	<dt>CAPAIAN HASIL BELAJAR</dt>
-                                        </dl>
-
-                                        <dl class="font-weight-bold">
-                                        	<dd>A . Sikap</dd>
-                                        </dl>
-                                        <table class="table table-bordered"  style="border: 2px solid black">
-                                        <?php foreach ($sem->result() as $key) {
+                 ?>
+                 
+                </td>
+                <td>Rombel</td>
+                <td>:</td>
+                <td><?php echo $key->rombel ?></td>
+            </tr>
+        </table>
+       <?php endforeach ?>
+        <br>
+        <h6 ><b>CAPAIAN HASIL BELAJAR</b></h6>
+        <h7><b>A. Sikap</b></h7>  
+        <table style="border: 2px solid black; font-size: 90% ; margin-top: 3px; padding: 3px" >
+            <tr>
+              <td width="1%">
+                
+              </td>
+              <?php foreach ($sem->result() as $key) {
                                          $total = array($key->s,$key->i,$key->a);
                                          $hasil = 100 - (132 - array_sum($total)) / 132 * 1 / 100;
                                                     
                                          ?>
-                                        	<tr>
-                                        		<td>
-                                        			<b>Deskripsi :</b> <br>
-                                        			1. Peserta didik menunjukkan sikap sungguh-sungguh dalam menerapkan sikap Spiritual, Jujur, Disiplin, Tanggung jawab, Toleransi, Gotong Royong, Sopan atau Santun dan Percaya diri <br>
-                                        			2. Persentase kehadiran siswa  <?php echo round($hasil,2) ?>%.
-                                        			
-                                                     	
-                                        		</td>
-                                        	</tr>
-                                        <?php } ?>
-                                        </table>
-
-                                         <dl class="font-weight-bold">
-                                        	<dd>B .	 Pengetahuan dan Keterampilan</dd>
-                                        </dl>
-                                        
-                                        <?php 
+                <td>
+                    <b>Deskripsi :</b> <br>
+                    1. Peserta didik menunjukkan sikap sungguh-sungguh dalam menerapkan sikap Spiritual, Jujur, Disiplin, Tanggung jawab, Toleransi, Gotong Royong, Sopan atau Santun dan Percaya diri <br>
+                    2. Persentase kehadiran siswa  <?php echo round($hasil,2) ?>%.
+                   <?php } ?> 
+                        
+                </td>
+            </tr>
+        </table>
+        <br>
+        <h7><b>B. Pengetahuan dan Keterampilan</b></h7>  
+           <?php 
                                         if ($this->uri->segment(3) == 1 ) {
                                           ?>
 
                                         <!-- SEMESTER 1 -->
-                                        <table class="mb-1 mt-4 table table-bordered text-center "  style="border: 2px solid black">
+                                        <table class="table table-bordered text-center "  style="border: 2px solid black; font-size: 90% ; margin-top: 3px">
                                           <thead>
                                             <tr>
                                             <th rowspan="2" colspan="2">MATA PELAJARAN</th>
@@ -228,7 +157,7 @@
                                               <th>Angka</th>
                                               <th>Predikat</th>
                                               <th>Deskripsi</th>
-											  <th>KB*</th>
+                        <th>KB*</th>
                                               <th>Angka</th>
                                               <th>Predikat</th>
                                               <th>Deskripsi</th>
@@ -240,7 +169,7 @@
                                             <?php 
                                             $no = 1;
                                             foreach ($uh1p as $index => $key) {
-                                            	$total = array(
+                                              $total = array(
                                                             $key->nilai,
                                                             $uh2p[$index]->nilai,
                                                             $uh3p[$index]->nilai,
@@ -251,26 +180,26 @@
                                                     $uas = $uasp[$index]->nilai;
                                                     $jumlah = ($uh + $uts + $uas) / 3;
                                                   if ($jumlah == 0) {
-                                                  	$Predikat = '-';
-                                                  	$ket = '-';
+                                                    $Predikat = '-';
+                                                    $ket = '-';
                                                   }elseif ($jumlah < 50) {
-                                                  	$Predikat = 'E';
-                                                  	$ket = 'sangat kurang';
+                                                    $Predikat = 'E';
+                                                    $ket = 'sangat kurang';
                                                   }elseif ($jumlah < 65) {
-                                                  	$Predikat = 'D';
-                                                  	$ket = 'kurang';
+                                                    $Predikat = 'D';
+                                                    $ket = 'kurang';
                                                   }elseif ($jumlah < 80) {
-                                                  	$Predikat = 'C';
-                                                  	$ket = 'cukup';
+                                                    $Predikat = 'C';
+                                                    $ket = 'cukup';
                                                   }elseif ($jumlah < 90) {
-                                                  	$Predikat = 'B';
-                                                  	$ket = 'baik';
+                                                    $Predikat = 'B';
+                                                    $ket = 'baik';
                                                   }else{
-                                                  	$Predikat = 'A';
-                                                  	$ket = 'sangat baik';
+                                                    $Predikat = 'A';
+                                                    $ket = 'sangat baik';
                                                   }
 
-												$totalk = array(
+                        $totalk = array(
                                                       $uh1k[$index]->nilai,
                                                       $uh2k[$index]->nilai,
                                                       $uh3k[$index]->nilai,
@@ -282,23 +211,23 @@
                                                   $kuas = $uasp[$index]->nilai;
                                                   $kjumlah = ($kuh + $kuts + $kuas) / 3;
                                                   if ($kjumlah == 0) {
-                                                  	$kPredikat = '-';
-                                                  	$kket = '-';
+                                                    $kPredikat = '-';
+                                                    $kket = '-';
                                                   }elseif ($kjumlah < 50) {
-                                                  	$kPredikat = 'E';
-                                                  	$kket = 'sangat kurang';
+                                                    $kPredikat = 'E';
+                                                    $kket = 'sangat kurang';
                                                   }elseif ($kjumlah < 65) {
-                                                  	$kPredikat = 'D';
-                                                  	$kket = 'kurang';
+                                                    $kPredikat = 'D';
+                                                    $kket = 'kurang';
                                                   }elseif ($kjumlah < 80) {
-                                                  	$kPredikat = 'C';
-                                                  	$kket = 'cukup';
+                                                    $kPredikat = 'C';
+                                                    $kket = 'cukup';
                                                   }elseif ($kjumlah < 90) {
-                                                  	$kPredikat = 'B';
-                                                  	$kket = 'baik';
+                                                    $kPredikat = 'B';
+                                                    $kket = 'baik';
                                                   }else{
-                                                  	$kPredikat = 'A';
-                                                  	$kket = 'sangat baik';
+                                                    $kPredikat = 'A';
+                                                    $kket = 'sangat baik';
                                                   }
                                               ?>
                                               <tr>
@@ -327,7 +256,7 @@
                                      ?> 
 
                                      <!-- SEMESTER 2  -->
-                                    <table class="mb-1 mt-4 table table-bordered text-center "  style="border: 2px solid black">
+                                    <table class="table table-bordered border-black text-center "  style="border: 2px solid black; font-size: 90% ; margin-top: 3px">
                                           <thead>
                                             <tr>
                                             <th rowspan="2" colspan="2">MATA PELAJARAN</th>
@@ -339,7 +268,7 @@
                                               <th>Angka</th>
                                               <th>Predikat</th>
                                               <th>Deskripsi</th>
-											  <th>KB*</th>
+                        <th>KB*</th>
                                               <th>Angka</th>
                                               <th>Predikat</th>
                                               <th>Deskripsi</th>
@@ -351,7 +280,7 @@
                                             <?php 
                                             $no = 1;
                                             foreach ($uh1p as $index => $key) {
-                                            	$total = array(
+                                              $total = array(
                                                             $uh5p[$index]->nilai,
                                                             $uh6p[$index]->nilai,
                                                             $uh7p[$index]->nilai,
@@ -362,26 +291,26 @@
                                                     $uas = $ukkp[$index]->nilai;
                                                     $jumlah = ($uh + $uts + $uas) / 3;
                                                   if ($jumlah == 0) {
-                                                  	$Predikat = '-';
-                                                  	$ket = '-';
+                                                    $Predikat = '-';
+                                                    $ket = '-';
                                                   }elseif ($jumlah < 50) {
-                                                  	$Predikat = 'E';
-                                                  	$ket = 'sangat kurang';
+                                                    $Predikat = 'E';
+                                                    $ket = 'sangat kurang';
                                                   }elseif ($jumlah < 65) {
-                                                  	$Predikat = 'D';
-                                                  	$ket = 'kurang';
+                                                    $Predikat = 'D';
+                                                    $ket = 'kurang';
                                                   }elseif ($jumlah < 80) {
-                                                  	$Predikat = 'C';
-                                                  	$ket = 'cukup';
+                                                    $Predikat = 'C';
+                                                    $ket = 'cukup';
                                                   }elseif ($jumlah < 90) {
-                                                  	$Predikat = 'B';
-                                                  	$ket = 'baik';
+                                                    $Predikat = 'B';
+                                                    $ket = 'baik';
                                                   }else{
-                                                  	$Predikat = 'A';
-                                                  	$ket = 'sangat baik';
+                                                    $Predikat = 'A';
+                                                    $ket = 'sangat baik';
                                                   }
 
-												$totalk = array(
+                        $totalk = array(
                                                       $uh5k[$index]->nilai,
                                                       $uh6k[$index]->nilai,
                                                       $uh7k[$index]->nilai,
@@ -392,23 +321,23 @@
                                                   $kuh = array_sum($totalk)/4;
                                                   $kjumlah = ($kuh + $kuts + $kuas) / 3;
                                                   if ($kjumlah == 0) {
-                                                  	$kPredikat = '-';
-                                                  	$kket = '-';
+                                                    $kPredikat = '-';
+                                                    $kket = '-';
                                                   }elseif ($kjumlah < 50) {
-                                                  	$kPredikat = 'E';
-                                                  	$kket = 'sangat kurang';
+                                                    $kPredikat = 'E';
+                                                    $kket = 'sangat kurang';
                                                   }elseif ($kjumlah < 65) {
-                                                  	$kPredikat = 'D';
-                                                  	$kket = 'kurang';
+                                                    $kPredikat = 'D';
+                                                    $kket = 'kurang';
                                                   }elseif ($kjumlah < 80) {
-                                                  	$kPredikat = 'C';
-                                                  	$kket = 'cukup';
+                                                    $kPredikat = 'C';
+                                                    $kket = 'cukup';
                                                   }elseif ($kjumlah < 90) {
-                                                  	$kPredikat = 'B';
-                                                  	$kket = 'baik';
+                                                    $kPredikat = 'B';
+                                                    $kket = 'baik';
                                                   }else{
-                                                  	$kPredikat = 'A';
-                                                  	$kket = 'sangat baik';
+                                                    $kPredikat = 'A';
+                                                    $kket = 'sangat baik';
                                                   }
                                               ?>
                                               <tr>
@@ -435,10 +364,8 @@
                                    <?php  }
                                          ?>
 
-                                         <dl class="font-weight-bold mt-4">
-                                          <dd>C . Ekstrakulikuler</dd>
-                                        </dl>
-                                        <table class="table table-bordered" style="border: 2px solid black">
+        <h7><b>C. Ekstrakulikuler</b></h7>  
+         <table class="table table-bordered" style="border: 2px solid black; font-size: 90%; margin-top: 3px">
                                           <thead>
                                             <tr>
                                               <td width="5%">No</td>
@@ -491,11 +418,9 @@
                                             </tr>
                                           </tbody>
 
-                                        </table>
-                                          <dl class="font-weight-bold mt-4">
-                                          <dd>D . Prestasi</dd>
-                                        </dl>
-                                        <table class="table table-bordered"  style="border: 2px solid black">
+                                        </table>  
+       <h7><b>D. Prestasi</b></h7>  
+         <table class="table table-bordered" style="border: 2px solid black; font-size: 90%; margin-top: 3px">
                                           <thead>
                                             <tr>
                                               <td width="5%">No</td>
@@ -529,94 +454,93 @@
                                           </tbody>
                                         </table>
 
-                                         <dl class="font-weight-bold mt-4">
-                                        	<dd>E .	Ketidakhadiran</dd>
-                                        </dl>
+                               <h7><b>E. Ketidakhadiran</b></h7>  
+                                     <table class="table table-bordered" style="border: 2px solid black; font-size: 90%; margin-top: 3px">
+                                        <thead>
+                                            <tr>
+                                              <th width="30%">Keterangan</th>
+                                              <th>Jumlah</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                          <?php foreach ($sem->result() as $key) {
+                                            ?>
+                                            <tr>
+                                              <td>Sakit</td>
+                                              <td><?php echo $key->s ?></td>
+                                            </tr>
+                                            <tr>
+                                              <td>Izin</td>
+                                              <td><?php echo $key->i ?></td>
+                                            </tr>
+                                            <tr>
+                                              <td>Tanpa Keterangan</td>
+                                              <td><?php echo $key->a ?></td>
+                                            </tr>
+                                          <?php } ?>
+                                          </tbody>
+                                     </table>
+                                        <br>  <br>  <br>  <br>  <br>  <br>
 
-                                        <table class="table table-bordered"  style="border: 2px solid black">
+                                           <h7><b>F. Catatan Pembimbing</b></h7>  
 
-                                        	<thead>
-                                        		<tr>
-                                        			<th width="30%">Keterangan</th>
-                                        			<th>Jumlah</th>
-                                        		</tr>
-                                        	</thead>
-                                        	<tbody>
-                                        	<?php foreach ($sem->result() as $key) {
-                                        		?>
-                                        		<tr>
-                                        			<td>Sakit</td>
-                                        			<td><?php echo $key->s ?></td>
-                                        		</tr>
-                                        		<tr>
-                                        			<td>Izin</td>
-                                        			<td><?php echo $key->i ?></td>
-                                        		</tr>
-                                        		<tr>
-                                        			<td>Tanpa Keterangan</td>
-                                        			<td><?php echo $key->a ?></td>
-                                        		</tr>
-                                        	<?php } ?>
-                                        	</tbody>
-                                        </table>
+                                          <div class="col-lg-12" style="border: 2px solid black; height: 20vh; margin-top: 3px; margin-bottom: 10px">
+                                            
+                                          </div>
 
-                                        <dl class="font-weight-bold mt-4">
-                                        	<dd>F .	Catatan Pembimbing</dd>
-                                        	<div class="col-lg-12 mt-3" style="border: 2px solid black; height: 20vh;">
-                                        		
-                                        	</div>
-                                        </dl>
+                                            <h7><b>G. Tanggapan Orang Tua</b></h7>  
 
-                                        <dl class="font-weight-bold mt-4">
-                                        	<dd>G .	Tanggapan Orang Tua/Wali</dd>
-                                        	<div class="col-lg-12 mt-3" style="border: 2px solid black; height: 20vh;">
-                                        		
-                                        	</div>
-                                        </dl>
+                                          <div class="col-lg-12 " style="border: 2px solid black; height: 20vh; margin-top: 3px">
+                                            
+                                          </div>
 
-                                        <div class="col-lg-12 mt-4" style="border: 2px solid black; height: 25vh;">
-                                        	<div class="row">
-                                        		<div class="col-md-4">
-                                        			<p>Disahkan Oleh <br>Kepala SMK Wikrama Bogor</p>
-                                        			<br><br><br>
-                                        			<p>Iin Mulyani,S.Si.</p>
-                                        		</div>
-                                        		<div class="col-md-4">
-                                        			<p>Mengetahui <br>Orang Tua/Wali</p>
-                                        			<br><br><br>
-                                        			<p>..........................</p>
-                                        		</div>
-                                        		<?php 
-                                        		function tgl_indo($tanggal){
-													$bulan = array (
-														1 =>   'Januari',
-														'Februari',
-														'Maret',
-														'April',
-														'Mei',
-														'Juni',
-														'Juli',
-														'Agustus',
-														'September',
-														'Oktober',
-														'November',
-														'Desember'
-													);
-													$pecahkan = explode('-', $tanggal);
-													
-													return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
-												}
-                                        		 ?>
-                                        		<div class="col-md-4">
-                                        			<p>Bogor, <?php echo tgl_indo(date('Y-m-d')); ?> <br>Pembimbing</p>
-                                        			<br><br><br>
-                                        			<p>..........................</p>
-                                        		</div>
-                                        	</div>
+
+                                        <div class="col-lg-12 mt-4" style="border: 2px solid black; height: 23vh;">
+                                           <?php 
+                                            function tgl_indo($tanggal){
+                                            $bulan = array (
+                                              1 =>   'Januari',
+                                              'Februari',
+                                              'Maret',
+                                              'April',
+                                              'Mei',
+                                              'Juni',
+                                              'Juli',
+                                              'Agustus',
+                                              'September',
+                                              'Oktober',
+                                              'November',
+                                              'Desember'
+                                            );
+                                            $pecahkan = explode('-', $tanggal);
+                                            
+                                            return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+                                          } ?>
+                                          <table width="100%">
+                                            <tr>
+                                              <td width="40%">Disahkan Oleh</td>
+                                              <td width="35%">Mengetahui</td>
+                                              <td width="20%">Bogor, <?php echo tgl_indo(date('Y-m-d')); ?></td>
+                                            </tr>
+                                            <tr>
+                                              <td>Kepala SMK Wikrama Bogor</td>
+                                              <td>Orang Tua/Wali</td>
+                                              <td>Pembimbing</td>
+                                            </tr>
+                                            <tr>
+                                              <td><br><br><br><br></td>
+                                            </tr>
+                                            <tr>
+                                              <td>Iin Mulyani, S.si.</td>
+                                              <td>...........................</td>
+                                              <td>...........................</td>
+                                            </tr>
+                                          </table>
                                         </div>
+    </form>      
 
-                                        </div>
-                                </div>
+                             </div>
+                           </div>
                             </div>
                         </div>  
                     </div>
@@ -624,4 +548,34 @@
         </div>
     </div>
 <script type="text/javascript" src="<?php echo base_url('assets/scripts/main.js') ?>"></script></body>
+
+<script type="text/javascript" src="<?php echo base_url('assets/scripts/main.js') ?>"></script></body>
+<script type="text/javascript" src="<?php echo base_url('assets/scripts/jquery.min.js') ?>"></script></body>
+<script type="text/javascript" src="<?php echo base_url('assets/scripts/printThis.js') ?>"></script></body>
+<script type="text/javascript">
+  $('#print').click(function(){
+    $('.cetak').printThis({
+       debug: false,               // show the iframe for debugging
+        importCSS: true,            // import parent page css
+        importStyle: false,         // import style tags
+        printContainer: true,       // print outer container/$.selector
+        loadCSS: "<?php echo base_url('style.css') ?>",                // path to additional css file - use an array [] for multiple
+        pageTitle: "",              // add title to print page
+        removeInline: false,        // remove inline styles from print elements
+        removeInlineSelector: "*",  // custom selectors to filter inline styles. removeInline must be true
+        printDelay: 333,            // variable print delay
+        header: null,               // prefix to html
+        footer: null,               // postfix to html
+        base: false,                // preserve the BASE tag or accept a string for the URL
+        formValues: true,           // preserve input/form values
+        canvas: false,              // copy canvas content
+        doctypeString: '<!DOCTYPE html>', // enter a different doctype for older markup
+        removeScripts: false,       // remove script tags from print content
+        copyTagClasses: false,      // copy classes from the html & body tag
+        beforePrintEvent: null,     // callback function for printEvent in iframe
+        beforePrint: null,          // function called before iframe is filled
+        afterPrint: null            // function called before iframe is removed
+    });
+  })
+</script>
 </html>
